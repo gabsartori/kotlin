@@ -1,3 +1,3 @@
 # kotlin
-Gabriela Sartori de Quadros
+Gabriela Sartori de Quadros /
 Henrique Casanova Colussi
