@@ -4,14 +4,36 @@ import br.upf.sistemaLivros.model.Livro
 import org.springframework.stereotype.Repository
 
 @Repository
-class LivroRepository {
-    private val livros = mutableListOf<Livro>()
+class LivroRepository(
+    private var livros: MutableList<Livro>) {
     private var nextId: Long = 1
 
-    fun salvarLivro(livro: Livro): Livro {
-        val livroComId = livro.copy(id = nextId++)
-        livros.add(livroComId)
-        return livroComId
+    init {
+        val livro1 = Livro(
+            id = 1,
+            nome = "Harry Potter",
+            autor = "J.K. Rowling",
+            categoria = "Fantasia"
+        )
+
+        val livro2 = Livro(
+            id = 2,
+            nome = "O morro dos ventos uivantes",
+            autor = "Emily Brontë",
+            categoria = "Romance"
+        )
+        val livro3 = Livro(
+            id = 3,
+            nome = "Frankenstein",
+            autor = "Mary Shelley",
+            categoria = "Ficção Científica"
+        )
+        livros = mutableListOf(livro1, livro2, livro3)
+    }
+    fun findAll() = livros
+
+    fun salvarLivro(livro: Livro) {
+        livros.add(livro)
     }
 
     fun listarLivros(): List<Livro> {
@@ -31,12 +53,8 @@ class LivroRepository {
         return livroExistente
     }
 
-    fun deletarLivro(id: Long): Boolean {
+    fun deletarLivro(id: Long) {
         val livroExistente = livros.find { it.id == id }
-        if (livroExistente != null) {
             livros.remove(livroExistente)
-            return true
-        }
-        return false
     }
 }

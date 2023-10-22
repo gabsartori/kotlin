@@ -6,23 +6,23 @@ import org.springframework.stereotype.Service
 
 @Service
 class LivroService(private val livroRepository: LivroRepository) {
-    fun criarLivro(livro: Livro): Livro {
-        return livroRepository.salvarLivro(livro)
+    fun criarLivro(livro: Livro) {
+        livroRepository.salvarLivro(livro)
     }
 
     fun listarLivros(): List<Livro> {
-        return livroRepository.listarLivros()
+        return livroRepository.findAll()
     }
 
     fun buscarLivroPorId(id: Long): Livro? {
-        return livroRepository.buscarLivroPorId(id)
+        return livroRepository.findAll().first {it.id == id}
     }
 
     fun atualizarLivro(livro: Livro): Livro? {
         return livroRepository.atualizarLivro(livro)
     }
 
-    fun deletarLivro(id: Long): Boolean {
-        return livroRepository.deletarLivro(id)
+    fun deletarLivro(id: Long) {
+        livroRepository.deletarLivro(id)
     }
 }
